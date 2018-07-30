@@ -1,11 +1,6 @@
 function bubbleSort(array) {
   let sortedArr = [];
 
-  // looping:
-  // take two and swap or not
-  // when reaches the end
-  // sortedArray.unshift(array.pop())
-
   while (array.length) {
     if (array.length === 1) {
       sortedArr.unshift(array.pop());

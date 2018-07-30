@@ -1,11 +1,18 @@
 describe('Bubble Sort', function() {
-  spyOn(bubbleSort, 'swap').and.callThrough();
+  //spyOn(bubbleSort, 'swap').and.callThrough();
 
   it('handles an empty array', function() {
     expect(bubbleSort([])).toEqual([]);
   });
 
   it('handles an single item in array', function() {
+    let array = bubbleSort([1]);
+    expect(array);
+
+    it('tracks that the spy was called', function() {
+      expect(foo.swap).toHaveBeenCalled();
+    });
+
     expect(bubbleSort([1])).toEqual([1]);
   });
 
