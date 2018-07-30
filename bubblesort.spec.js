@@ -1,5 +1,5 @@
 describe('Bubble Sort', function() {
-  it('handles an empty array', function() {
+  fit('handles an empty array', function() {
     expect(bubbleSort([])).toEqual([]);
   });
 
