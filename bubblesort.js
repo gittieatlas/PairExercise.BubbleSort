@@ -1,30 +1,28 @@
+'use-strict';
+
 function bubbleSort(array) {
-  let sortedArr = [];
+  let sorted = false;
 
-  while (array.length) {
-    if (array.length === 1) {
-      sortedArr.unshift(array.pop());
-      break;
-    }
-
-    for (let i = 0; i < array.length - 1; i++) {
-      const leftElement = array[i];
-      const rightElement = array[i + 1];
-
-      if (rightElement > leftElement) {
-        let obj = swap(leftElement, rightElement);
-        array[i] = obj.right;
-        array[i + 1] = obj.left;
+  for (let end = array.length; end > 0 && !sorted; end--) {
+    sorted = true;
+    for (let j = 0; j < end; j++) {
+      if (!inOrder(array, j)) {
+        swap(array, j);
+        sorted = false;
       }
     }
   }
 
-  return sortedArr;
+  return array;
 }
 
-function swap(left, right) {
-  return {
-    left: left < right ? left : right,
-    right: left > right ? left : right
-  };
+function inOrder(array, index) {
+  if (index === array.length - 1) return true;
+  return array[index] < array[index + 1];
+}
+
+function swap(array, index) {
+  let oldLeftValue = array[index];
+  array[index] = array[index + 1];
+  array[index + 1] = oldLeftValue;
 }

@@ -1,23 +1,43 @@
+'use-strict';
+
+function generateArray(size, lower, upper) {
+  let randomArray = [];
+  while (size--) {
+    let randomNum = Math.floor(lower + Math.random() * upper);
+    randomArray.push(randomNum);
+  }
+  return randomArray;
+}
+
+function numerically(a, b) {
+  return a - b;
+}
+
 describe('Bubble Sort', function() {
-  fit('handles an empty array', function() {
+  it('sorts an empty array', function() {
     expect(bubbleSort([])).toEqual([]);
   });
+  it('sorts an array of one element', function() {
+    expect(bubbleSort([7])).toEqual([7]);
+  });
 
-  it('handles an single item in array', function() {
-    let array = bubbleSort([1]);
-    expect(array);
-
-    it('tracks that the spy was called', function() {
-      expect(foo.swap).toHaveBeenCalled();
+  for (let i = 2; i < 103; i += 20) {
+    it('sorts an array of ' + i + ' random items', function() {
+      let arr = generateArray(i, 0, 100);
+      let sorted = arr.slice(0).sort(numerically);
+      expect(bubbleSort(arr)).toEqual(sorted);
     });
+  }
 
-    expect(bubbleSort([1])).toEqual([1]);
+  it('compares the expected number of times', () => {
+    spyOn(window, 'inOrder').and.callThrough();
+    bubbleSort([4, 6, 5, 1]);
+    expect(inOrder.calls.count()).toEqual(10);
   });
 
-  it('handles an multiple items in array', function() {
-    expect(bubbleSort([1, 3, 2])).toEqual([1, 2, 3]);
+  it('swaps the expected number of times', () => {
+    spyOn(window, 'swap').and.callThrough();
+    bubbleSort([4, 6, 5, 1]);
+    expect(swap.calls.count()).toEqual(4);
   });
-
-  // TODO not use sort method
-  // TODO check if using bubble sort algorithm
 });
